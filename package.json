@@ -8,9 +8,6 @@
     "sass": "sass --watch style.scss style.css",
     "lint": "eslint --max-warning=0 ."
   },
-  "gitHooks": {
-    "pre-push": "npm run lint"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LoicAnael/loic_anael_7_30042022.git"

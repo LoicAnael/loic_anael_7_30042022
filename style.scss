@@ -1,0 +1,46 @@
+$primary-color: #d04f4f;
+
+@mixin flex-items($display, $align, $justify) {
+  display: $display;
+  align-items: $align;
+  justify-content: $justify;
+}
+
+.header {
+  @include flex-items(flex, center, center);
+  flex-direction: column;
+  padding-top: 20px;
+  &-logo {
+    width: 50px;
+    height: 48px;
+  }
+  &-title {
+    font-family: "DM-sans", sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    color: $primary-color;
+    margin-top: 5px;
+  }
+}
+.search {
+  &-body {
+    @include flex-items(flex, center, center);
+  }
+  &-input {
+    border-radius: 5px;
+    width: 90%;
+    border: none;
+    outline: none;
+    background-color: #e7e7e7;
+    height: 60px;
+    padding-left: 20px;
+    font-size: 18px;
+    font-family: "lato", sans-serif;
+  }
+  &-icon {
+    position: relative;
+    font-size: 25px;
+    right: 40px;
+    cursor: pointer;
+  }
+}
