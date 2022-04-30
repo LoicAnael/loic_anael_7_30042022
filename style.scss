@@ -6,6 +6,10 @@ $primary-color: #d04f4f;
   justify-content: $justify;
 }
 
+body {
+  box-sizing: border-box;
+}
+/////////////part style for header section/////////
 .header {
   @include flex-items(flex, center, center);
   flex-direction: column;
@@ -22,25 +26,64 @@ $primary-color: #d04f4f;
     margin-top: 5px;
   }
 }
-.search {
-  &-body {
-    @include flex-items(flex, center, center);
-  }
-  &-input {
+//////////////part style for search section////////////////
+.search-body {
+  @include flex-items(flex, center, center);
+  width: 100%;
+  .search-input {
     border-radius: 5px;
     width: 90%;
     border: none;
     outline: none;
     background-color: #e7e7e7;
-    height: 60px;
+    height: 69px;
     padding-left: 20px;
     font-size: 18px;
     font-family: "lato", sans-serif;
   }
-  &-icon {
+  .search-icon {
     position: relative;
     font-size: 25px;
     right: 40px;
+    cursor: pointer;
+  }
+}
+
+/////////////////part style for filters section///////////////
+section {
+  width: 94%;
+  margin: auto;
+}
+.filter {
+  font-family: "Lato", sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 20px;
+  &-buttons {
+    display: flex;
+    gap: 20px;
+  }
+  &-button {
+    border: none;
+    border-radius: 5px;
+    padding: 20px 20px;
+    color: white;
+    @include flex-items(flex, center, unset);
+    gap: 20px;
+    cursor: pointer;
+  }
+  .btn-1 {
+    background-color: #3282f7;
+  }
+  .btn-2 {
+    background-color: #68d9a4;
+  }
+  .btn-3 {
+    background-color: #ed6454;
+  }
+  .chevron {
+    color: white;
     cursor: pointer;
   }
 }
