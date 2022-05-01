@@ -72,6 +72,7 @@ section {
     @include flex-items(flex, center, unset);
     gap: 20px;
     cursor: pointer;
+    //display: none;
   }
   .btn-1 {
     background-color: #3282f7;
@@ -86,4 +87,34 @@ section {
     color: white;
     cursor: pointer;
   }
+  &-dropdown {
+    width: 400px;
+    //width: 667px;
+    //display: none;
+    border-radius: 5px;
+    border: 1px solid red;
+  }
+  &-chevron {
+    @include flex-items(flex, center, space-between);
+    padding: 20px;
+    .filter-input {
+      border: none;
+      outline: none;
+      width: 100%;
+      font-size: 20px;
+      color: white;
+      &::placeholder {
+        color: inherit;
+        opacity: 0.5;
+      }
+    }
+  }
+  &-list {
+    display: grid;
+    width: auto;
+    padding: 20px;
+    color: white;
+  }
 }
+
+/////////////PART STYLE FOR DROPDOWN///////////////
