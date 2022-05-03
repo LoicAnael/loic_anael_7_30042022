@@ -1,6 +1,6 @@
 import { recipes } from "./recipes.js";
 
-export default class recipesdetail {
+export default class recipesDetail {
   getRecipes() {
     console.log(recipes);
     return recipes;

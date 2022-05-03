@@ -1,5 +1,5 @@
-import recipesdetail from "./recipesdetail.js";
-new recipesdetail().getRecipes();
-new recipesdetail().getIngredient();
-new recipesdetail().getAppliance();
-new recipesdetail().getUstensils();
+import recipesDetail from "./recipesdetail.js";
+new recipesDetail().getRecipes();
+new recipesDetail().getIngredient();
+new recipesDetail().getAppliance();
+new recipesDetail().getUstensils();
