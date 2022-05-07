@@ -21,13 +21,16 @@ function displayRecipes(recipes, inputValue) {
       recipesList.innerHTML += recipeTemplate;
     } else if (
       recipe.name.toLowerCase().includes(inputValue) ||
-      recipe.description.toLowerCase().includes(inputValue) || recipe.ingredients.some(element => element.ingredient.toLowerCase().includes(inputValue))
+      recipe.description.toLowerCase().includes(inputValue) ||
+      recipe.ingredients.some((element) =>
+        element.ingredient.toLowerCase().includes(inputValue)
+      )
     ) {
       let recipeTemplate = new RecipeCard().recipeCard(recipe);
       recipesList.innerHTML += recipeTemplate;
-    } else{
+    } else {
       recipesList.innerHTML = "introuvable";
-      }
+    }
   });
 }
 
@@ -41,7 +44,10 @@ input.addEventListener("input", (e) => {
     allRecipes.forEach((recipe) => {
       if (
         recipe.name.toLowerCase().includes(inputValue) ||
-        recipe.description.toLowerCase().includes(inputValue)  || recipe.ingredients.some(element => element.ingredient.toLowerCase().includes(inputValue))
+        recipe.description.toLowerCase().includes(inputValue) ||
+        recipe.ingredients.some((element) =>
+          element.ingredient.toLowerCase().includes(inputValue)
+        )
       ) {
         resultRecipes.push(recipe);
       }
@@ -51,3 +57,32 @@ input.addEventListener("input", (e) => {
   }
   displayRecipes(resultRecipes, inputValue);
 });
+
+///////////////filter buttons event//////////////
+let filterInput = document.querySelectorAll(".filter-input");
+let filterDropdown = document.querySelectorAll(".filter-dropdown");
+let filterButton = document.querySelectorAll(".filter-button");
+let chevronUp = document.querySelectorAll(".fa-chevron-up");
+let isFilterOpen = false;
+console.log(filterInput);
+console.log(filterDropdown);
+console.log(filterButton);
+console.log(chevronUp);
+for (let i = 0; i < filterButton.length; i++) {
+  filterButton[i].addEventListener("click", () => {
+    if (!isFilterOpen) {
+      console.log(filterButton);
+      filterButton[i].style.display = "none";
+      filterDropdown[i].style.display = "block";
+    }
+  });
+}
+for (let i = 0; i < chevronUp.length; i++) {
+  chevronUp[i].addEventListener("click", () => {
+    if (isFilterOpen) {
+      console.log(filterButton);
+      filterDropdown[i].style.display = "none";
+      filterButton[i].style.display = "flex";
+    }
+  });
+}

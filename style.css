@@ -52,14 +52,25 @@ section {
 
 .filter {
   font-family: "Lato", sans-serif;
-  display: flex;
-  flex-direction: column;
   gap: 20px;
-  padding-top: 20px;
+  position: relative;
+  padding-bottom: 30px;
+}
+.filter-chosen {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 20px;
 }
 .filter-buttons {
   display: flex;
-  gap: 20px;
+  column-gap: 20px;
+  z-index: 1;
+  position: absolute;
+}
+.filter-buttons .filter-class {
+  z-index: 1;
+  margin-bottom: 20px;
 }
 .filter-button {
   border: none;
@@ -86,7 +97,9 @@ section {
   cursor: pointer;
 }
 .filter-dropdown {
-  width: 400px;
+  min-width: 400px;
+  max-width: 667px;
+  display: none;
   border-radius: 5px;
 }
 .filter-chevron {
@@ -118,7 +131,7 @@ section {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
-  padding-top: 60px;
+  padding-top: 50px;
 }
 #recipes .card {
   background-color: #e7e7e7;
