@@ -9,14 +9,13 @@ export default class recipesDetail {
       ...recipes
         .map((recipe) =>
           recipe.ingredients.map((element) => element.ingredient)
-        )
-        .flat(),
+        ).flat(),
     ];
     return ingredients;
   }
   getAppliance() {
-    let appliance = [...recipes.map((recipe) => recipe.appliance)];
-    return appliance;
+    let appliances = [...recipes.map((recipe) => recipe.appliance).flat()];
+    return appliances;
   }
   getUstensils() {
     let ustensils = [...recipes.map((recipe) => recipe.ustensils).flat()];
