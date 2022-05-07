@@ -59,30 +59,22 @@ input.addEventListener("input", (e) => {
 });
 
 ///////////////filter buttons event//////////////
-let filterInput = document.querySelectorAll(".filter-input");
+//let filterInput = document.querySelectorAll(".filter-input");
 let filterDropdown = document.querySelectorAll(".filter-dropdown");
 let filterButton = document.querySelectorAll(".filter-button");
 let chevronUp = document.querySelectorAll(".fa-chevron-up");
-let isFilterOpen = false;
-console.log(filterInput);
-console.log(filterDropdown);
-console.log(filterButton);
-console.log(chevronUp);
+let isFilterOpen = null;
+
 for (let i = 0; i < filterButton.length; i++) {
   filterButton[i].addEventListener("click", () => {
-    if (!isFilterOpen) {
-      console.log(filterButton);
-      filterButton[i].style.display = "none";
-      filterDropdown[i].style.display = "block";
-    }
+    filterButton[i].style.display = "none";
+    filterDropdown[i].style.display = "block";
   });
+  isFilterOpen;
 }
 for (let i = 0; i < chevronUp.length; i++) {
   chevronUp[i].addEventListener("click", () => {
-    if (isFilterOpen) {
-      console.log(filterButton);
-      filterDropdown[i].style.display = "none";
-      filterButton[i].style.display = "flex";
-    }
+    filterDropdown[i].style.display = "none";
+    filterButton[i].style.display = "flex";
   });
 }
