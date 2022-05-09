@@ -59,22 +59,39 @@ input.addEventListener("input", (e) => {
 });
 
 ///////////////filter buttons event//////////////
-//let filterInput = document.querySelectorAll(".filter-input");
-let filterDropdown = document.querySelectorAll(".filter-dropdown");
-let filterButton = document.querySelectorAll(".filter-button");
-let chevronUp = document.querySelectorAll(".fa-chevron-up");
-let isFilterOpen = null;
 
-for (let i = 0; i < filterButton.length; i++) {
-  filterButton[i].addEventListener("click", () => {
-    filterButton[i].style.display = "none";
-    filterDropdown[i].style.display = "block";
-  });
-  isFilterOpen;
+////ingredient button event/////
+//let filterInput = document.querySelectorAll(".filter-input");
+let ingredientDropdown = document.getElementById("ingredient-dropdown");
+let ingredientButton = document.getElementById("ingredient-btn");
+let closeIngredient = document.querySelector("#close-ingredient");
+let appareilDropdown = document.getElementById("appareil-dropdown");
+let appareilButton = document.getElementById("appareil-btn");
+let closeAppareil = document.querySelector("#close-appareil");
+let ustensilDropdown = document.getElementById("ustensil-dropdown");
+let ustensilButton = document.getElementById("ustensil-btn");
+let closeUstensil = document.querySelector("#close-ustensil");
+
+function openFilter(btn, dropdown) {
+  btn.style.display = "none";
+  dropdown.style.display = "block";
 }
-for (let i = 0; i < chevronUp.length; i++) {
-  chevronUp[i].addEventListener("click", () => {
-    filterDropdown[i].style.display = "none";
-    filterButton[i].style.display = "flex";
+function closeFilter(btn, dropdown, icon) {
+  icon.addEventListener("click", () => {
+    dropdown.style.display = "none";
+    btn.style.display = "flex";
   });
 }
+closeFilter(ingredientButton, ingredientDropdown, closeIngredient);
+closeFilter(appareilButton, appareilDropdown, closeAppareil);
+closeFilter(ustensilButton, ustensilDropdown, closeUstensil);
+
+ingredientButton.addEventListener("click", () => {
+  openFilter(ingredientButton, ingredientDropdown);
+});
+appareilButton.addEventListener("click", () => {
+  openFilter(appareilButton, appareilDropdown);
+});
+ustensilButton.addEventListener("click", () => {
+  openFilter(ustensilButton, ustensilDropdown);
+});
