@@ -18,14 +18,16 @@ export default class RecipeCard {
              <div class="card-details__description">
                  <div class="card-details__description--left">
                          ${recipe.ingredients
+
                            .map(
-                             (a) => `
+                             (a) =>
+                               `
                          <div for="ingredient" class="recipes__ingredient">
                              <p class="recipes__ingredient_name">
                              ${a.ingredient} : 
                          </p>
                          <p class="recipes__ingredient_value">
-                             ${a.quantity} ${a.unit}
+                            ${a.quantity} ${a.unit}                        
                          </p>
                          </div>
                          `

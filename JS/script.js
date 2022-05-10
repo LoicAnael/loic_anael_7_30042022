@@ -15,23 +15,23 @@ let input = document.querySelector(".search-input");
 let inputValue;
 function displayRecipes(recipes, inputValue) {
   recipesList.innerHTML = "";
-  recipes.forEach((recipe) => {
-    if (inputValue == null || inputValue == undefined || inputValue == "") {
-      let recipeTemplate = new RecipeCard().recipeCard(recipe);
-      recipesList.innerHTML += recipeTemplate;
-    } else if (
-      recipe.name.toLowerCase().includes(inputValue) ||
-      recipe.description.toLowerCase().includes(inputValue) ||
-      recipe.ingredients.some((element) =>
-        element.ingredient.toLowerCase().includes(inputValue)
-      )
-    ) {
-      let recipeTemplate = new RecipeCard().recipeCard(recipe);
-      recipesList.innerHTML += recipeTemplate;
-    } else {
-      recipesList.innerHTML = "introuvable";
-    }
-  });
+  if (recipes.length > 0) {
+    recipes.forEach((recipe) => {
+      recipe.ingredients.map((a) => {
+        a.unit == undefined ? (a.unit = "") : (a.unit = a.unit);
+        a.quantity == undefined ? (a.quantity = "") : (a.quantity = a.quantity);
+      });
+      if (inputValue == null || inputValue == undefined || inputValue == "") {
+        let recipeTemplate = new RecipeCard().recipeCard(recipe);
+        recipesList.innerHTML += recipeTemplate;
+      } else {
+        let recipeTemplate = new RecipeCard().recipeCard(recipe);
+        recipesList.innerHTML += recipeTemplate;
+      }
+    });
+  } else {
+    recipesList.innerHTML = "introuvable";
+  }
 }
 
 displayRecipes(allRecipes, inputValue);
