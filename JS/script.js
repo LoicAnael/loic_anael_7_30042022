@@ -82,7 +82,7 @@ function closeFilter(btn, dropdown, icon) {
 ////////display all recipes filters function////////////
 
 function displayIngredients(allElements, elementList) {
-  ingredientList.innerHTML = ``;
+  elementList.innerHTML = "";
   allElements.forEach((element) => {
     let filterTemplate = `<p>${element}</p>`;
     elementList.innerHTML += filterTemplate;

@@ -97,10 +97,10 @@ section {
   cursor: pointer;
 }
 .filter-dropdown {
+  border-radius: 5px;
   min-width: 400px;
   max-width: 667px;
   display: none;
-  border-radius: 5px;
 }
 .filter-chevron {
   display: flex;
@@ -121,9 +121,16 @@ section {
 }
 .filter-list {
   display: grid;
-  width: auto;
-  padding: 20px;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 0 20px;
   color: white;
+}
+.filter-list p {
+  margin-top: 0;
+}
+.filter-list p:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 #recipes {

@@ -96,10 +96,10 @@ section {
     cursor: pointer;
   }
   &-dropdown {
+    border-radius: 5px;
     min-width: 400px;
     max-width: 667px;
     display: none;
-    border-radius: 5px;
   }
   &-chevron {
     @include flex-items(flex, center, space-between);
@@ -118,9 +118,16 @@ section {
   }
   &-list {
     display: grid;
-    width: auto;
-    padding: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 0 20px;
     color: white;
+    p {
+      margin-top: 0;
+      &:hover {
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
   }
 }
 
