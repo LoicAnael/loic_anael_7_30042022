@@ -55,6 +55,7 @@ let ingredientDropdown = document.getElementById("ingredient-dropdown");
 let ingredientButton = document.getElementById("ingredient-btn");
 let closeIngredient = document.querySelector("#close-ingredient");
 let ingredientList = document.getElementById("ingredient-list");
+let inputIngredient = document.getElementById("ingredient-input");
 
 ////appareil button and event event/////
 let appareilDropdown = document.getElementById("appareil-dropdown");
@@ -78,6 +79,9 @@ function closeFilter(btn, dropdown, icon) {
     btn.style.display = "flex";
   });
 }
+closeFilter(ingredientButton, ingredientDropdown, closeIngredient);
+closeFilter(appareilButton, appareilDropdown, closeAppareil);
+closeFilter(ustensilButton, ustensilDropdown, closeUstensil);
 
 ////////display all recipes filters function////////////
 
@@ -88,10 +92,6 @@ function displayIngredients(allElements, elementList) {
     elementList.innerHTML += filterTemplate;
   });
 }
-
-closeFilter(ingredientButton, ingredientDropdown, closeIngredient);
-closeFilter(appareilButton, appareilDropdown, closeAppareil);
-closeFilter(ustensilButton, ustensilDropdown, closeUstensil);
 
 ingredientButton.addEventListener("click", () => {
   openFilter(ingredientButton, ingredientDropdown);
@@ -104,4 +104,18 @@ appareilButton.addEventListener("click", () => {
 ustensilButton.addEventListener("click", () => {
   openFilter(ustensilButton, ustensilDropdown);
   displayIngredients(allUstensils, ustensilList);
+});
+ingredientList.innerHTML = "";
+let resultIngredients = [];
+document.getElementById("ingredient-input").addEventListener("input", (e) => {
+  let inputValu = e.target.value;
+  resultIngredients = [];
+  ingredientList.innerHTML = "";
+  allIngredient.forEach((recip) => {
+    if (recip.toLowerCase().includes(inputValu)) {
+      resultIngredients.push(recip);
+    }
+    console.log(resultIngredients);
+  });
+  displayIngredients(resultIngredients, ingredientList);
 });
