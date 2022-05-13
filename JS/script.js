@@ -62,12 +62,14 @@ let appareilDropdown = document.getElementById("appareil-dropdown");
 let appareilButton = document.getElementById("appareil-btn");
 let closeAppareil = document.querySelector("#close-appareil");
 let appareilList = document.getElementById("appareil-list");
+let inputAppareil = document.getElementById("appareil-input");
 
 ////ustensiles button and event event/////
 let ustensilDropdown = document.getElementById("ustensil-dropdown");
 let ustensilButton = document.getElementById("ustensil-btn");
 let closeUstensil = document.querySelector("#close-ustensil");
 let ustensilList = document.getElementById("ustensil-list");
+let inputUstensile = document.getElementById("ustensile-input");
 
 function openFilter(btn, dropdown) {
   btn.style.display = "none";
@@ -105,7 +107,24 @@ ustensilButton.addEventListener("click", () => {
   openFilter(ustensilButton, ustensilDropdown);
   displayIngredients(allUstensils, ustensilList);
 });
-ingredientList.innerHTML = "";
+
+function filterInput(inputs, allElements, elementList) {
+  inputs.addEventListener("input", (e) => {
+    let inputValue = e.target.value;
+    let resultItems = [];
+    elementList.innerHTML = "";
+    allElements.forEach((item) => {
+      if (item.toLowerCase().includes(inputValue.toLowerCase())) {
+        resultItems.push(item);
+      }
+    });
+    displayIngredients(resultItems, elementList);
+  });
+}
+filterInput(inputIngredient, allIngredient, ingredientList);
+filterInput(inputAppareil, allAppliance, appareilList);
+filterInput(inputUstensile, allUstensils, ustensilList);
+/*
 let resultIngredients = [];
 document.getElementById("ingredient-input").addEventListener("input", (e) => {
   let inputValu = e.target.value;
@@ -118,4 +137,4 @@ document.getElementById("ingredient-input").addEventListener("input", (e) => {
     console.log(resultIngredients);
   });
   displayIngredients(resultIngredients, ingredientList);
-});
+});*/
