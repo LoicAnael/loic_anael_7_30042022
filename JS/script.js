@@ -125,13 +125,25 @@ filterInput(inputIngredient, allIngredient, ingredientList);
 filterInput(inputAppareil, allAppliance, appareilList);
 filterInput(inputUstensile, allUstensils, ustensilList);
 
+/////////////declanchement de l'evenement pour selection et affichage de l'element//////////////
 let filterDropdown = document.querySelectorAll(".filter-dropdown");
 let filterResult = document.querySelector(".filter-chosen");
 filterDropdown.forEach((element) => {
   element.addEventListener("click", (e) => {
     let value = e.target.dataset.id;
+    let color;
     if (value !== undefined) {
-      let resultTemplate = `<div ><span>${value}</span><i class="far fa-times-circle"></i></div>`;
+      let type = e.target.parentNode.parentNode.id;
+      if (type == "ingredient-dropdown") {
+        color = "btn-1";
+      }
+      if (type == "appareil-dropdown") {
+        color = "btn-2";
+      }
+      if (type == "ustensil-dropdown") {
+        color = "btn-3";
+      }
+      let resultTemplate = `<div class="item ${color}"><span>${value}</span><i class="far fa-times-circle"></i></div>`;
       filterResult.innerHTML += resultTemplate;
     }
   });

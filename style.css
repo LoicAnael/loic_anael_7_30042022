@@ -61,6 +61,24 @@ section {
   align-items: center;
   justify-content: flex-start;
   margin-top: 20px;
+  gap: 15px;
+  width: 100%;
+  overflow: hidden;
+}
+.filter-chosen .item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: inherit;
+  color: white;
+  width: auto;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  white-space: nowrap;
+}
+.filter-chosen .item i {
+  cursor: pointer;
 }
 .filter-buttons {
   display: flex;

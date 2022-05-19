@@ -62,6 +62,24 @@ section {
   &-chosen {
     @include flex-items(flex, center, flex-start);
     margin-top: 20px;
+    gap: 15px;
+    width: 100%;
+    overflow: hidden;
+    .item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background-color: inherit;
+      color: white;
+      width: auto;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      white-space: nowrap;
+      i {
+        cursor: pointer;
+      }
+    }
   }
   &-buttons {
     display: flex;
