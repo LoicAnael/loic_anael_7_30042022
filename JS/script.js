@@ -90,7 +90,7 @@ closeFilter(ustensilButton, ustensilDropdown, closeUstensil);
 function displayIngredients(allElements, elementList) {
   elementList.innerHTML = "";
   allElements.forEach((element) => {
-    let filterTemplate = `<p>${element}</p>`;
+    let filterTemplate = `<p data-id="${element}">${element}</p>`;
     elementList.innerHTML += filterTemplate;
   });
 }
@@ -124,17 +124,15 @@ function filterInput(inputs, allElements, elementList) {
 filterInput(inputIngredient, allIngredient, ingredientList);
 filterInput(inputAppareil, allAppliance, appareilList);
 filterInput(inputUstensile, allUstensils, ustensilList);
-/*
-let resultIngredients = [];
-document.getElementById("ingredient-input").addEventListener("input", (e) => {
-  let inputValu = e.target.value;
-  resultIngredients = [];
-  ingredientList.innerHTML = "";
-  allIngredient.forEach((recip) => {
-    if (recip.toLowerCase().includes(inputValu)) {
-      resultIngredients.push(recip);
+
+let filterDropdown = document.querySelectorAll(".filter-dropdown");
+let filterResult = document.querySelector(".filter-chosen");
+filterDropdown.forEach((element) => {
+  element.addEventListener("click", (e) => {
+    let value = e.target.dataset.id;
+    if (value !== undefined) {
+      let resultTemplate = `<div ><span>${value}</span><i class="far fa-times-circle"></i></div>`;
+      filterResult.innerHTML += resultTemplate;
     }
-    console.log(resultIngredients);
   });
-  displayIngredients(resultIngredients, ingredientList);
-});*/
+});
