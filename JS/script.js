@@ -126,25 +126,27 @@ filterInput(inputAppareil, allAppliance, appareilList);
 filterInput(inputUstensile, allUstensils, ustensilList);
 
 /////////////declanchement de l'evenement pour selection et affichage de l'element//////////////
-let filterDropdown = document.querySelectorAll(".filter-dropdown");
 let filterResult = document.querySelector(".filter-chosen");
-filterDropdown.forEach((element) => {
-  element.addEventListener("click", (e) => {
-    let value = e.target.dataset.id;
-    let color;
-    if (value !== undefined) {
-      let type = e.target.parentNode.parentNode.id;
-      if (type == "ingredient-dropdown") {
-        color = "btn-1";
-      }
-      if (type == "appareil-dropdown") {
-        color = "btn-2";
-      }
-      if (type == "ustensil-dropdown") {
-        color = "btn-3";
-      }
-      let resultTemplate = `<div class="item ${color}"><span>${value}</span><i class="far fa-times-circle"></i></div>`;
-      filterResult.innerHTML += resultTemplate;
+document.addEventListener("click", (e) => {
+  let value = e.target.dataset.id;
+  let color;
+  if (value !== undefined) {
+    let type = e.target.parentNode.parentNode.id;
+    if (type == "ingredient-dropdown") {
+      color = "btn-1";
     }
-  });
+    if (type == "appareil-dropdown") {
+      color = "btn-2";
+    }
+    if (type == "ustensil-dropdown") {
+      color = "btn-3";
+    }
+    let resultTemplate = `<div class="item ${color}" id="btn-${value}"><span>${value}</span><i class="far fa-times-circle close" data-value="${value}"></i></div>`;
+    filterResult.innerHTML += resultTemplate;
+  }
+  /////////suppression des elements de filtres selectiones////////
+  let dataValue = e.target.dataset.value;
+  if (dataValue !== undefined) {
+    document.getElementById("btn-" + dataValue).remove();
+  }
 });
