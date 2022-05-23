@@ -7,24 +7,45 @@ let allUstensils = new recipesDetail().getUstensils();
 
 let recipesList = document.getElementById("recipes");
 let input = document.querySelector(".search-input");
+let filterResultArray = [];
 
-function displayRecipes(recipes) {
+function displayRecipes(recipes, filterResultArray) {
   recipesList.innerHTML = "";
-  if (recipes.length > 0) {
+  if (filterResultArray.length == 0) {
+    if (recipes.length > 0) {
+      recipes.forEach((recipe) => {
+        recipe.ingredients.map((a) => {
+          a.unit == undefined ? (a.unit = "") : a.unit;
+          a.quantity == undefined ? (a.quantity = "") : a.quantity;
+        });
+        let recipeTemplate = new RecipeCard().recipeCard(recipe);
+        recipesList.innerHTML += recipeTemplate;
+      });
+    } else {
+      recipesList.innerHTML =
+        "Aucune recette ne correspond à votre critère ... ";
+    }
+  } else if (filterResultArray.length > 0) {
     recipes.forEach((recipe) => {
       recipe.ingredients.map((a) => {
         a.unit == undefined ? (a.unit = "") : a.unit;
         a.quantity == undefined ? (a.quantity = "") : a.quantity;
       });
-      let recipeTemplate = new RecipeCard().recipeCard(recipe);
-      recipesList.innerHTML += recipeTemplate;
+      filterResultArray.forEach((element) => {
+        if (
+          recipe.name.includes(element) ||
+          recipe.description.includes(element) ||
+          recipe.ingredients.some((item) => item.ingredient.includes(element))
+        ) {
+          let recipeTemplate = new RecipeCard().recipeCard(recipe);
+          recipesList.innerHTML += recipeTemplate;
+        }
+      });
     });
-  } else {
-    recipesList.innerHTML = "introuvable";
   }
 }
 
-displayRecipes(allRecipes);
+displayRecipes(allRecipes, filterResultArray);
 
 input.addEventListener("input", (e) => {
   let inputValue = e.target.value.toLowerCase();
@@ -45,7 +66,7 @@ input.addEventListener("input", (e) => {
   } else {
     resultRecipes = allRecipes;
   }
-  displayRecipes(resultRecipes);
+  displayRecipes(resultRecipes, filterResultArray);
 });
 
 ///////////////filter buttons event//////////////
@@ -143,10 +164,12 @@ document.addEventListener("click", (e) => {
     }
     let resultTemplate = `<div class="item ${color}" id="btn-${value}"><span>${value}</span><i class="far fa-times-circle close" data-value="${value}"></i></div>`;
     filterResult.innerHTML += resultTemplate;
+    filterResultArray.push(value);
   }
   /////////suppression des elements de filtres selectiones////////
   let dataValue = e.target.dataset.value;
   if (dataValue !== undefined) {
     document.getElementById("btn-" + dataValue).remove();
   }
+  displayRecipes(allRecipes, filterResultArray);
 });
