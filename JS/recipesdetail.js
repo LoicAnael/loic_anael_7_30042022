@@ -6,20 +6,26 @@ export default class recipesDetail {
   }
   getIngredient() {
     let ingredients = [
-      ...recipes
-        .map((recipe) =>
-          recipe.ingredients.map((element) => element.ingredient)
-        )
-        .flat(),
+      ...new Set(
+        recipes
+          .map((recipe) =>
+            recipe.ingredients.map((element) => element.ingredient)
+          )
+          .flat()
+      ),
     ];
     return ingredients;
   }
   getAppliance() {
-    let appliances = [...recipes.map((recipe) => recipe.appliance).flat()];
+    let appliances = [
+      ...new Set(recipes.map((recipe) => recipe.appliance).flat()),
+    ];
     return appliances;
   }
   getUstensils() {
-    let ustensils = [...recipes.map((recipe) => recipe.ustensils).flat()];
+    let ustensils = [
+      ...new Set(recipes.map((recipe) => recipe.ustensils).flat()),
+    ];
     return ustensils;
   }
 }

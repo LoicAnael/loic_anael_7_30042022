@@ -33,9 +33,14 @@ function displayRecipes(recipes, filterResultArray) {
       });
       filterResultArray.forEach((element) => {
         if (
-          recipe.name.includes(element) ||
-          recipe.description.includes(element) ||
-          recipe.ingredients.some((item) => item.ingredient.includes(element))
+          recipe.appliance.includes(element) ||
+          recipe.ustensils.some(
+            (item) =>
+              item.includes(element) ||
+              recipe.ingredients.some((item) =>
+                item.ingredient.includes(element)
+              )
+          )
         ) {
           let recipeTemplate = new RecipeCard().recipeCard(recipe);
           recipesList.innerHTML += recipeTemplate;
