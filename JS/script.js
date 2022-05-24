@@ -118,6 +118,7 @@ function displayIngredients(allElements, elementList) {
 
 ingredientButton.addEventListener("click", () => {
   openFilter(ingredientButton, ingredientDropdown);
+
   displayIngredients(allIngredient, ingredientList);
 });
 appareilButton.addEventListener("click", () => {
@@ -146,6 +147,9 @@ filterInput(inputIngredient, allIngredient, ingredientList);
 filterInput(inputAppareil, allAppliance, appareilList);
 filterInput(inputUstensile, allUstensils, ustensilList);
 
+let ingredientSelected = [];
+let appareilSelected = [];
+let ustensilSelected = [];
 /////////////declanchement de l'evenement pour selection et affichage de l'element//////////////
 let filterResult = document.querySelector(".filter-chosen");
 document.addEventListener("click", (e) => {
@@ -155,12 +159,21 @@ document.addEventListener("click", (e) => {
     let type = e.target.parentNode.parentNode.id;
     if (type == "ingredient-dropdown") {
       color = "btn-1";
+      ingredientSelected.push(value);
+      if (ingredientSelected.length > 0) {
+        displayIngredients(ingredientSelected, ingredientList);
+        console.log(ingredientSelected);
+      }
     }
     if (type == "appareil-dropdown") {
       color = "btn-2";
+      appareilSelected.push(value);
+      displayIngredients(appareilSelected, appareilList);
     }
     if (type == "ustensil-dropdown") {
       color = "btn-3";
+      ustensilSelected.push(value);
+      displayIngredients(ustensilSelected, ustensilList);
     }
     let resultTemplate = `<div class="item ${color}" id="btn-${value}"><span>${value}</span><i class="far fa-times-circle close" data-value="${value}"></i></div>`;
     filterResult.innerHTML += resultTemplate;
@@ -169,7 +182,23 @@ document.addEventListener("click", (e) => {
   /////////suppression des elements de filtres selectiones////////
   let dataValue = e.target.dataset.value;
   if (dataValue !== undefined) {
+    filterResultArray.forEach((Value) => {
+      filterResultArray.splice(Value);
+    });
+    ingredientSelected.forEach((Value) => {
+      ingredientSelected.splice(Value);
+      displayIngredients(allIngredient, ingredientList);
+    });
+    appareilSelected.forEach((Value) => {
+      appareilSelected.splice(Value);
+      displayIngredients(allAppliance, appareilList);
+    });
+    ustensilSelected.forEach((Value) => {
+      ustensilSelected.splice(Value);
+      displayIngredients(allUstensils, ustensilList);
+    });
     document.getElementById("btn-" + dataValue).remove();
   }
+
   displayRecipes(allRecipes, filterResultArray);
 });

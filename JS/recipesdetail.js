@@ -9,7 +9,8 @@ export default class recipesDetail {
       ...recipes
         .map((recipe) =>
           recipe.ingredients.map((element) => element.ingredient)
-        ).flat(),
+        )
+        .flat(),
     ];
     return ingredients;
   }
