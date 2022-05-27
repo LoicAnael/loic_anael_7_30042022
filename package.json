@@ -6,7 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "sass": "sass --watch style.scss style.css",
-    "lint": "eslint --max-warning=0 ."
+    "lint": "eslint --max-warnings=0 ."
+  },
+  "gitHooks": {
+    "pre-push": "npm run lint"
   },
   "repository": {
     "type": "git",
