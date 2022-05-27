@@ -4,7 +4,6 @@ let allRecipes = new recipesDetail().getRecipes();
 let allIngredient = new recipesDetail().getIngredient();
 let allAppliance = new recipesDetail().getAppliance();
 let allUstensils = new recipesDetail().getUstensils();
-
 let recipesList = document.getElementById("recipes");
 let input = document.querySelector(".search-input");
 let filterResultArray = [];
@@ -52,6 +51,7 @@ function displayRecipes(recipes, filterResultArray) {
 
 displayRecipes(allRecipes, filterResultArray);
 
+////////event for displaying recipes by mmain search input//////////
 input.addEventListener("input", (e) => {
   let inputValue = e.target.value.toLowerCase();
   let inputLength = inputValue.length;
@@ -112,7 +112,6 @@ closeFilter(appareilButton, appareilDropdown, closeAppareil);
 closeFilter(ustensilButton, ustensilDropdown, closeUstensil);
 
 ////////display all recipes filters function////////////
-
 function displayIngredients(allElements, elementList) {
   elementList.innerHTML = "";
   allElements.forEach((element) => {
@@ -121,20 +120,23 @@ function displayIngredients(allElements, elementList) {
   });
 }
 
+////display ingredients filters items/////
 ingredientButton.addEventListener("click", () => {
   openFilter(ingredientButton, ingredientDropdown);
-
   displayIngredients(allIngredient, ingredientList);
 });
+////display appliances filters items/////
 appareilButton.addEventListener("click", () => {
   openFilter(appareilButton, appareilDropdown);
   displayIngredients(allAppliance, appareilList);
 });
+////display ustensiles filters items/////
 ustensilButton.addEventListener("click", () => {
   openFilter(ustensilButton, ustensilDropdown);
   displayIngredients(allUstensils, ustensilList);
 });
 
+//////display filters items by input event///////
 function filterInput(inputs, allElements, elementList) {
   inputs.addEventListener("input", (e) => {
     let inputValue = e.target.value;
@@ -152,11 +154,11 @@ filterInput(inputIngredient, allIngredient, ingredientList);
 filterInput(inputAppareil, allAppliance, appareilList);
 filterInput(inputUstensile, allUstensils, ustensilList);
 
+/////////////declanchement de l'evenement pour selection et affichage de l'element//////////////
+let filterResult = document.querySelector(".filter-chosen");
 let ingredientSelected = [];
 let appareilSelected = [];
 let ustensilSelected = [];
-/////////////declanchement de l'evenement pour selection et affichage de l'element//////////////
-let filterResult = document.querySelector(".filter-chosen");
 document.addEventListener("click", (e) => {
   let value = e.target.dataset.id;
   let color;
@@ -165,10 +167,7 @@ document.addEventListener("click", (e) => {
     if (type == "ingredient-dropdown") {
       color = "btn-1";
       ingredientSelected.push(value);
-      if (ingredientSelected.length > 0) {
-        displayIngredients(ingredientSelected, ingredientList);
-        console.log(ingredientSelected);
-      }
+      displayIngredients(ingredientSelected, ingredientList);
     }
     if (type == "appareil-dropdown") {
       color = "btn-2";
@@ -185,8 +184,8 @@ document.addEventListener("click", (e) => {
     filterResultArray.push(value);
   }
   /////////suppression des elements de filtres selectiones////////
-  let dataValue = e.target.dataset.value;
-  if (dataValue !== undefined) {
+  let deleteTag = e.target.dataset.value;
+  if (deleteTag !== undefined) {
     filterResultArray.forEach((Value) => {
       filterResultArray.splice(Value);
     });
@@ -202,8 +201,7 @@ document.addEventListener("click", (e) => {
       ustensilSelected.splice(Value);
       displayIngredients(allUstensils, ustensilList);
     });
-    document.getElementById("btn-" + dataValue).remove();
+    document.getElementById("btn-" + deleteTag).remove();
   }
-
   displayRecipes(allRecipes, filterResultArray);
 });
