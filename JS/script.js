@@ -12,40 +12,40 @@ function displayRecipes(recipes, filterResultArray) {
   recipesList.innerHTML = "";
   if (filterResultArray.length == 0) {
     if (recipes.length > 0) {
-      recipes.forEach((recipe) => {
-        recipe.ingredients.map((a) => {
+      for (let i = 0; i < recipes.length; i++) {
+        recipes[i].ingredients.map((a) => {
           a.unit == undefined ? (a.unit = "") : a.unit;
           a.quantity == undefined ? (a.quantity = "") : a.quantity;
         });
-        let recipeTemplate = new RecipeCard().recipeCard(recipe);
+        let recipeTemplate = new RecipeCard().recipeCard(recipes[i]);
         recipesList.innerHTML += recipeTemplate;
-      });
+      }
     } else {
       recipesList.innerHTML =
         "Aucune recette ne correspond à votre critère ... ";
     }
   } else if (filterResultArray.length > 0) {
-    recipes.forEach((recipe) => {
-      recipe.ingredients.map((a) => {
+    for (let i = 0; i < recipes.length; i++) {
+      recipes[i].ingredients.map((a) => {
         a.unit == undefined ? (a.unit = "") : a.unit;
         a.quantity == undefined ? (a.quantity = "") : a.quantity;
       });
-      filterResultArray.forEach((element) => {
+      for (let u = 0; u < filterResultArray.length; u++) {
         if (
-          recipe.appliance.includes(element) ||
-          recipe.ustensils.some(
+          recipes[i].appliance.includes(filterResultArray[u]) ||
+          recipes[i].ustensils.some(
             (item) =>
-              item.includes(element) ||
-              recipe.ingredients.some((item) =>
-                item.ingredient.includes(element)
+              item.includes(filterResultArray[u]) ||
+              recipes[i].ingredients.some((item) =>
+                item.ingredient.includes(filterResultArray[u])
               )
           )
         ) {
-          let recipeTemplate = new RecipeCard().recipeCard(recipe);
+          let recipeTemplate = new RecipeCard().recipeCard(recipes[i]);
           recipesList.innerHTML += recipeTemplate;
         }
-      });
-    });
+      }
+    }
   }
 }
 
@@ -57,24 +57,25 @@ input.addEventListener("input", (e) => {
   let inputLength = inputValue.length;
   let resultRecipes = [];
   if (inputLength >= 3) {
-    allRecipes.forEach((recipe) => {
+    for (let j = 0; j < allRecipes.length; j++) {
       if (
-        recipe.name.toLowerCase().includes(inputValue) ||
-        recipe.description.toLowerCase().includes(inputValue) ||
-        recipe.ingredients.some((element) =>
+        allRecipes[j].name.toLowerCase().includes(inputValue) ||
+        allRecipes[j].description.toLowerCase().includes(inputValue) ||
+        allRecipes[j].ingredients.some((element) =>
           element.ingredient.toLowerCase().includes(inputValue)
         )
       ) {
-        resultRecipes.push(recipe);
+        resultRecipes.push(allRecipes[j]);
+        console.log(allRecipes[j]);
       }
-    });
+    }
   } else {
     resultRecipes = allRecipes;
   }
   displayRecipes(resultRecipes, filterResultArray);
 });
 
-///////////////filter buttons event//////////////
+///////////////////////////////////////////////////////filter buttons event///////////////////////////////////////////////////////
 
 ////ingredient button and event event/////
 let ingredientDropdown = document.getElementById("ingredient-dropdown");
@@ -114,10 +115,10 @@ closeFilter(ustensilButton, ustensilDropdown, closeUstensil);
 ////////display all recipes filters function////////////
 function displayIngredients(allElements, elementList) {
   elementList.innerHTML = "";
-  allElements.forEach((element) => {
-    let filterTemplate = `<p data-id="${element}">${element}</p>`;
+  for (let i = 0; i < allElements.length; i++) {
+    let filterTemplate = `<p data-id="${allElements[i]}">${allElements[i]}</p>`;
     elementList.innerHTML += filterTemplate;
-  });
+  }
 }
 
 ////display ingredients filters items/////
@@ -142,11 +143,11 @@ function filterInput(inputs, allElements, elementList) {
     let inputValue = e.target.value;
     let resultItems = [];
     elementList.innerHTML = "";
-    allElements.forEach((item) => {
-      if (item.toLowerCase().includes(inputValue.toLowerCase())) {
-        resultItems.push(item);
+    for (let i = 0; i < allElements.length; i++) {
+      if (allElements[i].toLowerCase().includes(inputValue.toLowerCase())) {
+        resultItems.push(allElements[i]);
       }
-    });
+    }
     displayIngredients(resultItems, elementList);
   });
 }
@@ -154,7 +155,7 @@ filterInput(inputIngredient, allIngredient, ingredientList);
 filterInput(inputAppareil, allAppliance, appareilList);
 filterInput(inputUstensile, allUstensils, ustensilList);
 
-/////////////declanchement de l'evenement pour selection et affichage de l'element//////////////
+/////////////declanchement de l'evenement pour selection et affichage de l'element en TAG //////////////
 let filterResult = document.querySelector(".filter-chosen");
 let ingredientSelected = [];
 let appareilSelected = [];
@@ -186,21 +187,21 @@ document.addEventListener("click", (e) => {
   /////////suppression des elements de filtres selectiones////////
   let deleteTag = e.target.dataset.value;
   if (deleteTag !== undefined) {
-    filterResultArray.forEach((Value) => {
-      filterResultArray.splice(Value);
-    });
-    ingredientSelected.forEach((Value) => {
-      ingredientSelected.splice(Value);
+    for (let i = 0; i < filterResultArray.length; i++) {
+      filterResultArray.splice(i);
+    }
+    for (let i = 0; i < ingredientSelected.length; i++) {
+      ingredientSelected.splice(i);
       displayIngredients(allIngredient, ingredientList);
-    });
-    appareilSelected.forEach((Value) => {
-      appareilSelected.splice(Value);
+    }
+    for (let i = 0; i < appareilSelected.length; i++) {
+      appareilSelected.splice(i);
       displayIngredients(allAppliance, appareilList);
-    });
-    ustensilSelected.forEach((Value) => {
-      ustensilSelected.splice(Value);
+    }
+    for (let i = 0; i < ustensilSelected.length; i++) {
+      ustensilSelected.splice(i);
       displayIngredients(allUstensils, ustensilList);
-    });
+    }
     document.getElementById("btn-" + deleteTag).remove();
   }
   displayRecipes(allRecipes, filterResultArray);
