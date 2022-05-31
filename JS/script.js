@@ -7,6 +7,7 @@ let allUstensils = new recipesDetail().getUstensils();
 let recipesList = document.getElementById("recipes");
 let input = document.querySelector(".search-input");
 let filterResultArray = [];
+let resultRecipes = [];
 
 function displayRecipes(recipes) {
   if (recipes.length > 0) {
@@ -52,7 +53,7 @@ function displayRecipesByTags(filterResultArray) {
   }
 }
 displayRecipesByTags(filterResultArray);
-let resultRecipes = [];
+
 ////////event for displaying recipes by mmain search input//////////
 input.addEventListener("input", (e) => {
   let inputValue = e.target.value.toLowerCase();
@@ -74,6 +75,9 @@ input.addEventListener("input", (e) => {
     resultRecipes = allRecipes;
   }
   displayRecipes(resultRecipes);
+  if (filterResultArray.length > 0 && inputLength == 0) {
+    displayRecipesByTags(filterResultArray);
+  }
 });
 
 ///////////////filter buttons event//////////////
@@ -201,17 +205,17 @@ document.addEventListener("click", (e) => {
   /////////suppression des elements de filtres selectiones////////
   let deleteTag = e.target.dataset.value;
   if (deleteTag !== undefined) {
-    filterResultArray.forEach((Value) => {
-      if (Value.toLowerCase() === deleteTag.toLowerCase()) {
-        filterResultArray.splice(Value);
+    for (let i = 0; i < filterResultArray.length; i++) {
+      if (filterResultArray[i] === deleteTag) {
+        filterResultArray.splice(i);
+      }
+      if (filterResultArray.length > 0) {
         displayRecipesByTags(filterResultArray);
-      }
-      if (resultRecipes.length > 0) {
-        displayRecipes(resultRecipes);
       } else {
-        displayRecipes(allRecipes);
+        displayRecipes(resultRecipes);
       }
-    });
+    }
+
     ingredientSelected.forEach((Value) => {
       ingredientSelected.splice(Value);
       displayIngredients(allIngredient, ingredientList);
