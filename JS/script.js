@@ -202,7 +202,10 @@ document.addEventListener("click", (e) => {
   let deleteTag = e.target.dataset.value;
   if (deleteTag !== undefined) {
     filterResultArray.forEach((Value) => {
-      filterResultArray.splice(Value);
+      if (Value.toLowerCase() === deleteTag.toLowerCase()) {
+        filterResultArray.splice(Value);
+        displayRecipesByTags(filterResultArray);
+      }
       if (resultRecipes.length > 0) {
         displayRecipes(resultRecipes);
       } else {
