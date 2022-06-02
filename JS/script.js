@@ -202,7 +202,7 @@ document.addEventListener("click", (e) => {
     filterResultArray.push(value);
     displayRecipesByTags(filterResultArray);
   }
-  /////////suppression des elements de filtres selectiones////////
+  /////////suppression des tags de filtres selectiones////////
   let deleteTag = e.target.dataset.value;
   if (deleteTag !== undefined) {
     for (let i = 0; i < filterResultArray.length; i++) {
@@ -211,8 +211,10 @@ document.addEventListener("click", (e) => {
       }
       if (filterResultArray.length > 0) {
         displayRecipesByTags(filterResultArray);
-      } else {
+      } else if (resultRecipes.length > 0) {
         displayRecipes(resultRecipes);
+      } else {
+        displayRecipes(allRecipes);
       }
     }
 
