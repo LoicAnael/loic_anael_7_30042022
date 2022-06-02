@@ -82,6 +82,8 @@ section {
     }
   }
   &-buttons {
+    max-width: 100%;
+    overflow: hidden;
     display: flex;
     column-gap: 20px;
     z-index: 1;
@@ -115,7 +117,7 @@ section {
   }
   &-dropdown {
     border-radius: 5px;
-    min-width: 400px;
+    min-width: 350px;
     max-width: 667px;
     display: none;
   }
@@ -213,6 +215,20 @@ section {
           font-family: "roboto", sans-serif;
           overflow: auto;
         }
+      }
+    }
+  }
+}
+@media screen and (max-width: 768px) {
+  #recipes {
+    grid-template-columns: repeat(1, 1fr);
+    .card {
+      width: 100%;
+      height: 400px;
+      img {
+        object-fit: cover;
+        width: 100%;
+        height: 200px;
       }
     }
   }
