@@ -120,6 +120,8 @@ section {
     min-width: 350px;
     max-width: 667px;
     display: none;
+    max-height: 350px;
+    overflow: auto;
   }
   &-chevron {
     @include flex-items(flex, center, space-between);
