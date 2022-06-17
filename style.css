@@ -121,6 +121,8 @@ section {
   min-width: 350px;
   max-width: 667px;
   display: none;
+  max-height: 350px;
+  overflow: auto;
 }
 .filter-chevron {
   display: flex;

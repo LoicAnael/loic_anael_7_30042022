@@ -66,6 +66,7 @@ input.addEventListener("input", (e) => {
   let inputValue = e.target.value.toLowerCase();
   let inputLength = inputValue.length;
   resultRecipes = [];
+
   if (inputLength >= 3) {
     for (let j = 0; j < allRecipes.length; j++) {
       if (
