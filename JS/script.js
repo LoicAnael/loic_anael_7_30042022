@@ -87,8 +87,16 @@ input.addEventListener("input", (e) => {
     resultRecipes = allRecipes;
   }
   displayRecipes(resultRecipes);
+  displayIngredients(IngredientFiltered, ingredientList);
+  displayIngredients(ApplianceFiltered, appareilList);
+  displayIngredients(UstensilsFiltered, ustensilList);
   if (filterResultArray.length > 0 && inputLength == 0) {
     displayRecipesByTags(filterResultArray, filteredRecipes);
+  } else if (filterResultArray.length == 0 && inputLength == 0) {
+    displayRecipes(resultRecipes);
+    displayIngredients(allIngredient, ingredientList);
+    displayIngredients(allAppliance, appareilList);
+    displayIngredients(allUstensils, ustensilList);
   }
 });
 
@@ -253,18 +261,31 @@ document.addEventListener("click", (e) => {
         displayRecipes(allRecipes);
       }
     }
-    ingredientSelected.forEach((Value) => {
-      ingredientSelected.splice(Value);
-      displayIngredients(allIngredient, ingredientList);
-    });
-    appareilSelected.forEach((Value) => {
-      appareilSelected.splice(Value);
-      displayIngredients(allAppliance, appareilList);
-    });
-    ustensilSelected.forEach((Value) => {
-      ustensilSelected.splice(Value);
-      displayIngredients(allUstensils, ustensilList);
-    });
+    for (let i = 0; i < ingredientSelected.length; i++) {
+      ingredientSelected.splice(i);
+      if (resultRecipes.length > 0) {
+        displayIngredients(IngredientFiltered, ingredientList);
+        console.log(IngredientFiltered);
+      } else {
+        displayIngredients(allIngredient, ingredientList);
+      }
+    }
+    for (let i = 0; i < appareilSelected.length; i++) {
+      appareilSelected.splice(i);
+      if (resultRecipes.length > 0) {
+        displayIngredients(ApplianceFiltered, appareilList);
+      } else {
+        displayIngredients(allAppliance, appareilList);
+      }
+    }
+    for (let i = 0; i < ustensilSelected.length; i++) {
+      ustensilSelected.splice(i);
+      if (resultRecipes.length > 0) {
+        displayIngredients(UstensilsFiltered, ustensilList);
+      } else {
+        displayIngredients(allUstensils, ustensilList);
+      }
+    }
     document.getElementById("btn-" + deleteTag).remove();
   }
 });
