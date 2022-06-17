@@ -55,7 +55,6 @@ function displayRecipesByTags(filterResultArray, recipesArrray) {
           let recipeTemplate = new RecipeCard().recipeCard(recipe);
           recipesList.innerHTML += recipeTemplate;
           recipesTagArray.push(recipe);
-          console.log(recipesTagArray);
         }
       });
     });
@@ -245,6 +244,9 @@ document.addEventListener("click", (e) => {
   /////////suppression des tags de filtres selectiones////////
   let deleteTag = e.target.dataset.value;
   if (deleteTag !== undefined) {
+    for (let j = 0; j < recipesTagArray.length; j++) {
+      recipesTagArray.splice(j);
+    }
     for (let i = 0; i < filterResultArray.length; i++) {
       if (filterResultArray[i] === deleteTag) {
         filterResultArray.splice(i);
@@ -265,7 +267,6 @@ document.addEventListener("click", (e) => {
       ingredientSelected.splice(i);
       if (resultRecipes.length > 0) {
         displayIngredients(IngredientFiltered, ingredientList);
-        console.log(IngredientFiltered);
       } else {
         displayIngredients(allIngredient, ingredientList);
       }
