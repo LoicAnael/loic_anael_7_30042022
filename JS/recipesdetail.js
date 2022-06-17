@@ -1,10 +1,8 @@
-import { recipes } from "./recipes.js";
-
 export default class recipesDetail {
-  getRecipes() {
+  getRecipes(recipes) {
     return recipes;
   }
-  getIngredient() {
+  getIngredient(recipes) {
     let ingredients = [
       ...new Set(
         recipes
@@ -16,13 +14,13 @@ export default class recipesDetail {
     ];
     return ingredients;
   }
-  getAppliance() {
+  getAppliance(recipes) {
     let appliances = [
       ...new Set(recipes.map((recipe) => recipe.appliance).flat()),
     ];
     return appliances;
   }
-  getUstensils() {
+  getUstensils(recipes) {
     let ustensils = [
       ...new Set(recipes.map((recipe) => recipe.ustensils).flat()),
     ];
